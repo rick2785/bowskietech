@@ -1,24 +1,149 @@
-<body class="bg-[#0B0B0F] text-white p-8">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio | Bowskie Tech</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  /* Animation for fade in */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  }
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
 
-<h1 class="text-4xl mb-10">Portfolio</h1>
+  /* Project card hover */
+  .project-card img {
+    transition: transform 0.4s ease-in-out, filter 0.4s ease-in-out;
+  }
+  .project-card:hover img {
+    transform: scale(1.1);
+    filter: brightness(0.85);
+  }
+</style>
+</head>
+<body class="bg-[#050507] text-white">
 
-<div class="grid md:grid-cols-3 gap-6">
+<!-- Hero -->
+<section class="bg-purple-800 py-20 text-center text-white">
+  <h1 class="text-4xl font-extrabold mb-4">Our Projects & Case Studies</h1>
+  <p class="max-w-2xl mx-auto text-lg">
+    Explore how we've helped businesses grow through world‑class mobile apps, web platforms, and custom software solutions.
+  </p>
+</section>
 
-<div class="bg-[#111] p-6 rounded">
-<h3>Project Alpha</h3>
-<p class="text-gray-400">Mobile App</p>
-</div>
+<!-- Projects Grid -->
+<section class="py-16 px-6 lg:px-20">
+  <h2 class="text-3xl font-bold text-purple-400 text-center mb-10">Featured Work</h2>
 
-<div class="bg-[#111] p-6 rounded">
-<h3>Project Beta</h3>
-<p class="text-gray-400">Web Platform</p>
-</div>
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
 
-<div class="bg-[#111] p-6 rounded">
-<h3>Project Gamma</h3>
-<p class="text-gray-400">Startup MVP</p>
-</div>
+    <!-- Example Project Card -->
+    <div class="project-card bg-[#111013] rounded-2xl overflow-hidden fade-in" 
+         data-animate="fade-in">
+      <div class="relative">
+        <img src="apostolic.png" alt="Project 1 Screenshot" class="w-full h-60 object-cover">
+        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-4">
+          <h3 class="text-xl font-semibold">Apostolic Bible</h3>
+          <p class="text-sm text-gray-300">No Ads. No Subscriptions. Just Scripture.</p>
+        </div>
+      </div>
+      <div class="p-4">
+        <p class="text-purple-300 font-semibold text-sm">Results:</p>
+        <ul class="text-gray-300 text-sm space-y-1">
+          <li>+1,000 Active Users</li>
+          <li>250+ Verse of the Day Streaks Achieved</li>
+        </ul>
+      </div>
+    </div>
 
-</div>
+    <!-- Repeat card template for additional projects -->
+    <div class="project-card bg-[#111013] rounded-2xl overflow-hidden fade-in" data-animate="fade-in">
+      <div class="relative">
+        <img src="aulete.png" alt="Project 2 Screenshot" class="w-full h-60 object-cover">
+        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-4">
+          <h3 class="text-xl font-semibold">Aulete</h3>
+          <p class="text-sm text-gray-300">Musical platform with Woodwind focus</p>
+        </div>
+      </div>
+      <div class="p-4">
+        <p class="text-purple-300 font-semibold text-sm">Results:</p>
+        <ul class="text-gray-300 text-sm space-y-1">
+          <li>100,000+ Downloads</li>
+          <li>40% User Retention</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="project-card bg-[#111013] rounded-2xl overflow-hidden fade-in" data-animate="fade-in">
+      <div class="relative">
+        <img src="isaiah.png" alt="Project 3 Screenshot" class="w-full h-60 object-cover">
+        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-4">
+          <h3 class="text-xl font-semibold">Isaiah Radcliff</h3>
+          <p class="text-sm text-gray-300">Musical ear training to enhance hearing capabilites</p>
+        </div>
+      </div>
+      <div class="p-4">
+        <p class="text-purple-300 font-semibold text-sm">Results:</p>
+        <ul class="text-gray-300 text-sm space-y-1">
+          <li>Piano Lessons</li>
+          <li>Vocal Training</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="project-card bg-[#111013] rounded-2xl overflow-hidden fade-in" data-animate="fade-in">
+      <div class="relative">
+        <img src="inGreater.png" alt="Project 3 Screenshot" class="w-full h-60 object-cover">
+        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-4">
+          <h3 class="text-xl font-semibold">InGreater Company</h3>
+          <p class="text-sm text-gray-300">Event Planning Marketplace</p>
+        </div>
+      </div>
+      <div class="p-4">
+        <p class="text-purple-300 font-semibold text-sm">Results:</p>
+        <ul class="text-gray-300 text-sm space-y-1">
+          <li>200+ Recorded Events</li>
+          <li>1000+ Downloads</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Add more cards as needed following this pattern -->
+
+  </div>
+</section>
+
+<!-- Call to Action -->
+<section class="bg-purple-900 py-12 text-center">
+  <h2 class="text-3xl font-bold mb-4">Have a Project to Discuss?</h2>
+  <a href="contact.html"
+     class="bg-white text-purple-800 font-semibold px-8 py-4 rounded-xl hover:bg-gray-100 transition">
+     Let’s Build Together
+  </a>
+</section>
+
+<script>
+  // Simple fade‑in animation when visible
+  document.addEventListener('DOMContentLoaded', () => {
+    const items = document.querySelectorAll('[data-animate="fade-in"]');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.2 });
+
+    items.forEach(el => observer.observe(el));
+  });
+</script>
 
 </body>
+</html>
