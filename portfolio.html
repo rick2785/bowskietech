@@ -6,10 +6,10 @@
 <title>Portfolio | Bowskie Tech</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <style>
-  /* Animation for fade in */
+  /* ── Fade-in on scroll ── */
   .fade-in {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(24px);
     transition: opacity 0.6s ease-out, transform 0.6s ease-out;
   }
   .fade-in.visible {
@@ -17,13 +17,138 @@
     transform: translateY(0);
   }
 
-  /* Project card hover */
-  .project-card img {
-    transition: transform 0.4s ease-in-out, filter 0.4s ease-in-out;
+  /* ── Flip Card ── */
+  .flip-card {
+    perspective: 1200px;
+    height: 380px;
   }
-  .project-card:hover img {
-    transform: scale(1.1);
-    filter: brightness(0.85);
+
+  .flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: transform 0.65s cubic-bezier(0.4, 0.2, 0.2, 1);
+  }
+
+  /* Trigger flip on hover of the outer card */
+  .flip-card:hover .flip-card-inner {
+    transform: rotateY(180deg);
+  }
+
+  .flip-card-front,
+  .flip-card-back {
+    position: absolute;
+    inset: 0;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    border-radius: 1rem;
+    overflow: hidden;
+  }
+
+  /* Front face */
+  .flip-card-front {
+    background: #111013;
+  }
+
+  .flip-card-front img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* Gradient overlay on front */
+  .flip-card-front .overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.82) 0%,
+      rgba(0, 0, 0, 0.3) 45%,
+      transparent 100%
+    );
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 1.5rem;
+  }
+
+  /* Back face – rotated 180deg */
+  .flip-card-back {
+    transform: rotateY(180deg);
+    background: linear-gradient(135deg, #1a0a2e 0%, #2d1b4e 50%, #1a0a2e 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 2rem 1.75rem;
+    border: 1px solid rgba(168, 85, 247, 0.25);
+  }
+
+  /* Purple accent line on back */
+  .flip-card-back::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #7c3aed, #a855f7, #7c3aed);
+  }
+
+  /* Stat chip */
+  .stat-chip {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    padding: 0.65rem 0.9rem;
+    background: rgba(124, 58, 237, 0.15);
+    border: 1px solid rgba(168, 85, 247, 0.2);
+    border-radius: 0.6rem;
+    margin-bottom: 0.6rem;
+  }
+  .stat-chip .dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #a855f7;
+    flex-shrink: 0;
+    margin-top: 5px;
+  }
+
+  /* View Case Study button */
+  .view-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: linear-gradient(90deg, #7c3aed, #a855f7);
+    color: #fff;
+    font-weight: 600;
+    font-size: 0.85rem;
+    padding: 0.6rem 1.2rem;
+    border-radius: 0.5rem;
+    text-decoration: none;
+    transition: opacity 0.2s;
+  }
+  .view-btn:hover { opacity: 0.85; }
+  .view-btn svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  /* Tag badge */
+  .tag-badge {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    padding: 0.2rem 0.55rem;
+    background: rgba(168, 85, 247, 0.2);
+    border: 1px solid rgba(168, 85, 247, 0.35);
+    border-radius: 999px;
+    color: #c084fc;
+    margin-bottom: 0.75rem;
   }
 </style>
 </head>
@@ -32,121 +157,237 @@
 <!-- NAV -->
 <nav class="fixed w-full z-50 backdrop-blur-md bg-black/30 border-b border-white/10">
   <div class="max-w-7xl mx-auto flex justify-between items-center p-5">
-    <img src="assets/logo.png" class="h-10">
-
+    <img src="assets/logo.png" class="h-10" alt="Bowskie Tech">
     <div class="space-x-8 hidden md:block">
-      <a href="index.html" class="hover:text-purple-400">Home</a>
-      <a href="services.html" class="hover:text-purple-400">Services</a>
-      <a href="about.html" class="hover:text-purple-400">About</a>
+      <a href="index.html"     class="hover:text-purple-400">Home</a>
+      <a href="services.html"  class="hover:text-purple-400">Services</a>
+      <a href="about.html"     class="hover:text-purple-400">About</a>
       <a href="portfolio.html" class="hover:text-purple-400">Portfolio</a>
-      <a href="contact.html" class="bg-purple-700 px-5 py-2 rounded-lg hover:bg-purple-600">
-        Get Quote
-      </a>
+      <a href="contact.html"   class="bg-purple-700 px-5 py-2 rounded-lg hover:bg-purple-600">Get Quote</a>
     </div>
   </div>
 </nav>
 
 <!-- Hero -->
-<section class="bg-purple-800 py-20 text-center text-white">
-  <h1 class="text-4xl font-extrabold mb-4" style="padding-top: 20px">Our Projects & Case Studies</h1>
-  <p class="max-w-2xl mx-auto text-lg">
-    Explore how we've helped businesses grow through world‑class mobile apps, web platforms, and custom software solutions.
+<section class="bg-purple-800 py-24 text-center text-white" style="padding-top:6rem">
+  <h1 class="text-4xl font-extrabold mb-4 pt-5">Our Projects &amp; Case Studies</h1>
+  <p class="max-w-2xl mx-auto text-lg opacity-90">
+    Explore how we've helped businesses grow through world‑class mobile apps,
+    web platforms, and custom software solutions.
   </p>
 </section>
 
 <!-- Projects Grid -->
-<section class="py-16 px-6 lg:px-20">
-  <h2 class="text-3xl font-bold text-purple-400 text-center mb-10">Featured Work</h2>
+<section class="py-20 px-6 lg:px-20">
+  <h2 class="text-3xl font-bold text-purple-400 text-center mb-3">Featured Work</h2>
+  <p class="text-center text-gray-400 mb-12 text-sm tracking-wide uppercase">Hover a card to see the full case study</p>
 
-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
 
-    <!-- Example Project Card -->
-    <div class="project-card bg-[#111013] rounded-2xl overflow-hidden fade-in" 
-         data-animate="fade-in">
-      <div class="relative">
-        <img src="assets/apostolic.png" alt="Project 1 Screenshot" class="w-full h-60 object-cover">
-        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-4">
-          <h3 class="text-xl font-semibold">Apostolic Bible</h3>
-          <p class="text-sm text-gray-300">No Ads. No Subscriptions. Just Scripture.</p>
+    <!-- ── Card 1: Apostolic Bible ── -->
+    <div class="flip-card fade-in" data-animate="fade-in">
+      <div class="flip-card-inner">
+
+        <!-- Front -->
+        <div class="flip-card-front">
+          <img src="assets/apostolic.png" alt="Apostolic Bible">
+          <div class="overlay">
+            <span class="tag-badge">Mobile App</span>
+            <h3 class="text-xl font-bold leading-tight">Apostolic Bible</h3>
+            <p class="text-sm text-gray-300 mt-1">No Ads. No Subscriptions. Just Scripture.</p>
+          </div>
         </div>
-      </div>
-      <div class="p-4">
-        <p class="text-purple-300 font-semibold text-sm">Results:</p>
-        <ul class="text-gray-300 text-sm space-y-1">
-          <li>+1,000 Active Users</li>
-          <li>250+ Verse of the Day Streaks Achieved</li>
-        </ul>
+
+        <!-- Back -->
+        <div class="flip-card-back">
+          <div>
+            <span class="tag-badge">Mobile App</span>
+            <h3 class="text-xl font-bold mb-1">Apostolic Bible</h3>
+            <p class="text-gray-300 text-sm mb-4 leading-relaxed">
+              A distraction-free scripture app built for the Apostolic community.
+              Pure reading experience with daily verse streaks to encourage consistency.
+            </p>
+            <div>
+              <div class="stat-chip">
+                <span class="dot"></span>
+                <span class="text-sm text-gray-200"><strong class="text-white">1,000+</strong> Active Users</span>
+              </div>
+              <div class="stat-chip">
+                <span class="dot"></span>
+                <span class="text-sm text-gray-200"><strong class="text-white">250+</strong> Verse of the Day Streaks Achieved</span>
+              </div>
+              <div class="stat-chip">
+                <span class="dot"></span>
+                <span class="text-sm text-gray-200"><strong class="text-white">Zero</strong> Ads or Subscription Paywalls</span>
+              </div>
+            </div>
+          </div>
+          <a href="#" class="view-btn">
+            View Case Study
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+
       </div>
     </div>
 
-    <!-- Repeat card template for additional projects -->
-    <div class="project-card bg-[#111013] rounded-2xl overflow-hidden fade-in" data-animate="fade-in">
-      <div class="relative">
-        <img src="assets/aulete.png" alt="Project 2 Screenshot" class="w-full h-60 object-cover">
-        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-4">
-          <h3 class="text-xl font-semibold">Aulete</h3>
-          <p class="text-sm text-gray-300">Musical platform with Woodwind focus</p>
+    <!-- ── Card 2: Aulete ── -->
+    <div class="flip-card fade-in" data-animate="fade-in">
+      <div class="flip-card-inner">
+
+        <!-- Front -->
+        <div class="flip-card-front">
+          <img src="assets/aulete.png" alt="Aulete">
+          <div class="overlay">
+            <span class="tag-badge">Music Platform</span>
+            <h3 class="text-xl font-bold leading-tight">Aulete</h3>
+            <p class="text-sm text-gray-300 mt-1">Musical platform with Woodwind focus</p>
+          </div>
         </div>
-      </div>
-      <div class="p-4">
-        <p class="text-purple-300 font-semibold text-sm">Results:</p>
-        <ul class="text-gray-300 text-sm space-y-1">
-          <li>100,000+ Downloads</li>
-          <li>40% User Retention</li>
-        </ul>
+
+        <!-- Back -->
+        <div class="flip-card-back">
+          <div>
+            <span class="tag-badge">Music Platform</span>
+            <h3 class="text-xl font-bold mb-1">Aulete</h3>
+            <p class="text-gray-300 text-sm mb-4 leading-relaxed">
+              A niche music platform celebrating woodwind instruments — connecting
+              players, teachers, and enthusiasts in one seamless experience.
+            </p>
+            <div>
+              <div class="stat-chip">
+                <span class="dot"></span>
+                <span class="text-sm text-gray-200"><strong class="text-white">100,000+</strong> Downloads</span>
+              </div>
+              <div class="stat-chip">
+                <span class="dot"></span>
+                <span class="text-sm text-gray-200"><strong class="text-white">40%</strong> User Retention Rate</span>
+              </div>
+              <div class="stat-chip">
+                <span class="dot"></span>
+                <span class="text-sm text-gray-200"><strong class="text-white">Top‑Ranked</strong> in Niche Music Category</span>
+              </div>
+            </div>
+          </div>
+          <a href="#" class="view-btn">
+            View Case Study
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+
       </div>
     </div>
 
-    <div class="project-card bg-[#111013] rounded-2xl overflow-hidden fade-in" data-animate="fade-in">
-      <div class="relative">
-        <img src="assets/isaiah.png" alt="Project 3 Screenshot" class="w-full h-60 object-cover">
-        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-4">
-          <h3 class="text-xl font-semibold">Isaiah Radcliff</h3>
-          <p class="text-sm text-gray-300">Musical ear training to enhance hearing capabilites</p>
+    <!-- ── Card 3: Isaiah Radcliff ── -->
+    <div class="flip-card fade-in" data-animate="fade-in">
+      <div class="flip-card-inner">
+
+        <!-- Front -->
+        <div class="flip-card-front">
+          <img src="assets/isaiah.png" alt="Isaiah Radcliff">
+          <div class="overlay">
+            <span class="tag-badge">Education</span>
+            <h3 class="text-xl font-bold leading-tight">Isaiah Radcliff</h3>
+            <p class="text-sm text-gray-300 mt-1">Musical ear training to enhance hearing capabilities</p>
+          </div>
         </div>
-      </div>
-      <div class="p-4">
-        <p class="text-purple-300 font-semibold text-sm">Results:</p>
-        <ul class="text-gray-300 text-sm space-y-1">
-          <li>Piano Lessons</li>
-          <li>Vocal Training</li>
-        </ul>
+
+        <!-- Back -->
+        <div class="flip-card-back">
+          <div>
+            <span class="tag-badge">Education</span>
+            <h3 class="text-xl font-bold mb-1">Isaiah Radcliff</h3>
+            <p class="text-gray-300 text-sm mb-4 leading-relaxed">
+              A personal music training platform offering structured piano lessons and
+              vocal coaching to sharpen musical ear and performance skills.
+            </p>
+            <div>
+              <div class="stat-chip">
+                <span class="dot"></span>
+                <span class="text-sm text-gray-200"><strong class="text-white">Piano Lessons</strong> — Beginner to Advanced</span>
+              </div>
+              <div class="stat-chip">
+                <span class="dot"></span>
+                <span class="text-sm text-gray-200"><strong class="text-white">Vocal Training</strong> — Technique &amp; Range</span>
+              </div>
+              <div class="stat-chip">
+                <span class="dot"></span>
+                <span class="text-sm text-gray-200"><strong class="text-white">Ear Training</strong> — Enhanced Auditory Skills</span>
+              </div>
+            </div>
+          </div>
+          <a href="#" class="view-btn">
+            View Case Study
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+
       </div>
     </div>
 
-    <div class="project-card bg-[#111013] rounded-2xl overflow-hidden fade-in" data-animate="fade-in">
-      <div class="relative">
-        <img src="assets/inGreater.png" alt="Project 3 Screenshot" class="w-full h-60 object-cover">
-        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-4">
-          <h3 class="text-xl font-semibold">InGreater Company</h3>
-          <p class="text-sm text-gray-300">Event Planning Marketplace</p>
+    <!-- ── Card 4: InGreater Company ── -->
+    <div class="flip-card fade-in" data-animate="fade-in">
+      <div class="flip-card-inner">
+
+        <!-- Front -->
+        <div class="flip-card-front">
+          <img src="assets/inGreater.png" alt="InGreater Company">
+          <div class="overlay">
+            <span class="tag-badge">Marketplace</span>
+            <h3 class="text-xl font-bold leading-tight">InGreater Company</h3>
+            <p class="text-sm text-gray-300 mt-1">Event Planning Marketplace</p>
+          </div>
         </div>
-      </div>
-      <div class="p-4">
-        <p class="text-purple-300 font-semibold text-sm">Results:</p>
-        <ul class="text-gray-300 text-sm space-y-1">
-          <li>200+ Recorded Events</li>
-          <li>1000+ Downloads</li>
-        </ul>
+
+        <!-- Back -->
+        <div class="flip-card-back">
+          <div>
+            <span class="tag-badge">Marketplace</span>
+            <h3 class="text-xl font-bold mb-1">InGreater Company</h3>
+            <p class="text-gray-300 text-sm mb-4 leading-relaxed">
+              A two-sided marketplace connecting event planners with vendors, venues,
+              and service providers — streamlining the entire event lifecycle.
+            </p>
+            <div>
+              <div class="stat-chip">
+                <span class="dot"></span>
+                <span class="text-sm text-gray-200"><strong class="text-white">200+</strong> Recorded Events</span>
+              </div>
+              <div class="stat-chip">
+                <span class="dot"></span>
+                <span class="text-sm text-gray-200"><strong class="text-white">1,000+</strong> Downloads</span>
+              </div>
+              <div class="stat-chip">
+                <span class="dot"></span>
+                <span class="text-sm text-gray-200"><strong class="text-white">Growing</strong> Vendor Network</span>
+              </div>
+            </div>
+          </div>
+          <a href="#" class="view-btn">
+            View Case Study
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+
       </div>
     </div>
-
-    <!-- Add more cards as needed following this pattern -->
 
   </div>
 </section>
 
 <!-- Call to Action -->
-<section class="bg-purple-900 py-12 text-center">
-  <h2 class="text-3xl font-bold mb-4">Have a Project to Discuss?</h2>
+<section class="bg-purple-900 py-16 text-center">
+  <h2 class="text-3xl font-bold mb-3">Have a Project to Discuss?</h2>
+  <p class="text-purple-200 mb-7 text-base max-w-lg mx-auto">
+    From idea to launch — we build products that make an impact.
+  </p>
   <a href="contact.html"
-     class="bg-white text-purple-800 font-semibold px-8 py-4 rounded-xl hover:bg-gray-100 transition">
-     Let’s Build Together
+     class="bg-white text-purple-800 font-semibold px-10 py-4 rounded-xl hover:bg-gray-100 transition">
+    Let's Build Together
   </a>
 </section>
 
 <script>
-  // Simple fade‑in animation when visible
   document.addEventListener('DOMContentLoaded', () => {
     const items = document.querySelectorAll('[data-animate="fade-in"]');
     const observer = new IntersectionObserver(entries => {
@@ -156,8 +397,7 @@
           observer.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.2 });
-
+    }, { threshold: 0.15 });
     items.forEach(el => observer.observe(el));
   });
 </script>
