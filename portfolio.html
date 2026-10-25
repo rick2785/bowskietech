@@ -116,7 +116,7 @@
     margin-top: 5px;
   }
 
-  /* View Case Study button */
+  /* View Details button */
   .view-btn {
     display: inline-flex;
     align-items: center;
@@ -150,6 +150,38 @@
     color: #c084fc;
     margin-bottom: 0.75rem;
   }
+  /* Horizontal Link Row Settings */
+  .footer-links-row {
+    display: flex;
+    gap: 30px; /* Clean spacing gaps between link actions */
+    margin-bottom: 0 !important; /* Overrides standard paragraph defaults */
+  }
+  /* Accent Design for Footer Links */
+  .footer-links-row a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+  }
+
+  /* Interactive Feedback State */
+  .footer-links-row a:hover {
+    opacity: 0.85;
+    text-decoration: underline;
+  }
+  /* Mobile Layout Scaling Override */
+  @media (max-width: 640px) {
+      .bg-purple-900 {
+          padding: 20px;
+          border-radius: 8px;
+      }
+      .footer-links-row {
+          flex-direction: column;
+          gap: 15px;
+          text-align: center;
+      }
+  }
 </style>
 </head>
 <body class="bg-[#050507] text-white">
@@ -169,7 +201,7 @@
 </nav>
 
 <!-- Hero -->
-<section class="bg-purple-800 py-24 text-center text-white" style="padding-top:6rem">
+<section class="bg-purple-800 py-12 text-center text-white" style="padding-top:6rem">
   <h1 class="text-4xl font-extrabold mb-4 pt-5">Our Projects &amp; Case Studies</h1>
   <p class="max-w-2xl mx-auto text-lg opacity-90">
     Explore how we've helped businesses grow through world‑class mobile apps,
@@ -180,7 +212,7 @@
 <!-- Projects Grid -->
 <section class="py-20 px-6 lg:px-20">
   <h2 class="text-3xl font-bold text-purple-400 text-center mb-3">Featured Work</h2>
-  <p class="text-center text-gray-400 mb-12 text-sm tracking-wide uppercase">Hover a card to see the full case study</p>
+  <p class="text-center text-gray-400 mb-12 text-sm tracking-wide uppercase">Hover over a card to see statistics. Click button for full details</p>
 
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
 
@@ -222,8 +254,8 @@
               </div>
             </div>
           </div>
-          <a href="#" class="view-btn">
-            View Case Study
+          <a href="apostolicBible.html" class="view-btn">
+            View Details
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           </a>
         </div>
@@ -269,8 +301,8 @@
               </div>
             </div>
           </div>
-          <a href="#" class="view-btn">
-            View Case Study
+          <a href="aulete.html" class="view-btn">
+            View Details
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           </a>
         </div>
@@ -317,7 +349,7 @@
             </div>
           </div>
           <a href="#" class="view-btn">
-            View Case Study
+            View Details
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           </a>
         </div>
@@ -364,7 +396,7 @@
             </div>
           </div>
           <a href="#" class="view-btn">
-            View Case Study
+            View Details
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           </a>
         </div>
@@ -386,6 +418,12 @@
     Let's Build Together
   </a>
 </section>
+<footer class="bg-purple-900" style="padding: 20px;">
+  <p class="footer-links-row">
+    <a href="privatePolicy.html">Private Policy</a>
+    <a href="support.html">Email Support</a>
+  </p>
+</footer>
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {

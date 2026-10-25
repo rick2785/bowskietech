@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aulete | Bowskie Tech</title>
+  <!-- Google Fonts: Inter for clean, modern sans-serif typography -->
+  <link rel="preconnect" href="https://googleapis.com">
+  <link rel="preconnect" href="https://gstatic.com" crossorigin>
+  <link href="https://googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+    <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #ffffff;
+      color: #0d0c22;
+      padding: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .profile-container {
+      width: 100%;
+      max-width: 1200px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .section-container {
+      width: 100%;
+      display: block;
+      margin-top: 12px;
+    }
+
+    .main-title {
+      font-size: 32px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      color: #0d0c22;
+    }
+
+    .header-layout {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      width: 100%;
+      gap: 24px;
+    }
+
+    .section-layout {
+      width: 100%;
+      line-height: 1.6;
+      font-size: 16px;
+      text-align: center;
+    }
+
+    .left-section {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .user-info {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .avatar-wrapper {
+      position: relative;
+      width: 64px;
+      height: 64px;
+    }
+
+    .avatar {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid #000;
+    }
+
+    /* Responsive image style */
+    .logo-n {
+      width: 28px;
+      height: 28px;
+      object-fit: contain;
+      display: block;
+    }
+
+    .status-dot {
+      position: absolute;
+      bottom: 2px;
+      right: 2px;
+      width: 14px;
+      height: 14px;
+      background-color: #6dd49e;
+      border: 2px solid #ffffff;
+      border-radius: 50%;
+    }
+
+    .text-details {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .username {
+      font-size: 20px;
+      font-weight: 700;
+      color: #0d0c22;
+    }
+
+    .meta-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 14px;
+    }
+
+    .status-text {
+      color: #56b27e;
+      font-weight: 500;
+    }
+
+    .follow-btn {
+      color: #6e6d7a;
+      cursor: pointer;
+      font-weight: 400;
+      text-decoration: none;
+    }
+    .follow-btn:hover {
+      color: #0d0c22;
+    }
+
+    .contact-grid {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      color: #2c2c2c;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .contact-item svg {
+      width: 16px;
+      height: 16px;
+      color: #2c2c2c;
+    }
+
+    .right-section {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .icon-btn {
+      width: 48px;
+      height: 48px;
+      border: 1px solid #e7e7e9;
+      border-radius: 50%;
+      background: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: #0d0c22;
+      transition: background-color 0.2s, border-color 0.2s;
+    }
+    .icon-btn:hover {
+      border-color: #0d0c22;
+      background-color: #f8f8f9;
+    }
+    .icon-btn svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    .action-btn {
+      background-color: #0d0c22;
+      color: #ffffff;
+      border: none;
+      border-radius: 24px;
+      padding: 0 24px;
+      height: 48px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.2s;
+      margin-left: 4px;
+    }
+    .action-btn:hover {
+      background-color: #2c2c2c;
+    }
+
+    /* Responsive Grid Structure */
+    .image-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr); 
+      gap: 24px;              
+      width: 100%; /* FIXED: Ensures grid canvas spans full width layout container */
+    }
+
+    /* Card Component styling */
+    .grid-card {
+      background-color: #ffffff;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      width: 100%;
+      cursor: zoom-in;
+    }
+
+    .grid-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Image Asset Wrapping rules */
+    .image-wrapper {
+      position: relative;
+      width: 100%;
+      padding-top: 80%; /* Fix for image cropping */
+      background-color: #e9ecef;
+    }
+
+    .image-wrapper img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover; 
+    }
+
+    /* Full-Screen Backdrop Layer */
+    .lightbox-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(13, 12, 34, 0.95); /* Dark matching backdrop overlay blur */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999; /* Forces layer structural priority over header assets */
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    /* Toggle visibility modifier class rule handled by JS */
+    .lightbox-modal.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    /* Modal Focus View Content Image Box Asset */
+    .lightbox-content {
+      max-width: 90%;
+      max-height: 85%;
+      object-fit: contain;
+      border-radius: 12px;
+      transform: scale(0.9);
+      transition: transform 0.3s ease;
+    }
+
+    .lightbox-modal.active .lightbox-content {
+      transform: scale(1);
+    }
+
+    /* Modern Minimalist Exit/Close Button Component */
+    .lightbox-close {
+      position: absolute;
+      top: 24px;
+      right: 24px;
+      background: none;
+      border: none;
+      color: #ffffff;
+      cursor: pointer;
+      padding: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.2s ease, opacity 0.2s ease;
+    }
+
+    .lightbox-close:hover {
+      transform: scale(1.1);
+      opacity: 0.8;
+    }
+
+    .lightbox-close svg {
+      width: 32px;
+      height: 32px;
+    }
+
+    /* Responsive Desktop Layout Upgrade */
+    @media (min-width: 480px) {
+      .image-grid {
+        grid-template-cols: 1fr;
+      }
+    }
+  </style>
+
+</head>
+<body>
+  <div class="profile-container">
+    <!-- Header Title -->
+    <h1 class="main-title">Customizable Metronome and Music Practice App</h1>
+
+    <!-- Interactive Sub-Header Layout -->
+    <div class="header-layout">
+      
+      <!-- Left side: Avatar, credentials, contacts -->
+      <div class="left-section">
+        <div class="user-info">
+          <div class="avatar-wrapper">
+            <div class="avatar">
+              <img src="assets/AuleteLaunch.png" alt="Aulete App Logo" class="logo-n">
+            </div>
+            <div class="status-dot"></div>
+          </div>
+          <div class="text-details">
+            <div class="username">Aulete</div>
+            <div class="meta-row">
+              <span class="status-text">Available Now</span>
+              <a href="#" class="follow-btn">Follow</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-grid">
+          <a href="https://rick2785.github.io/bowskietech" class="contact-item" target="_blank">
+            <!-- Laptop/Website Icon -->
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+              <line x1="2" y1="21" x2="22" y2="21"></line>
+              <line x1="12" y1="17" x2="12" y2="21"></line>
+            </svg>
+            Bowskie Tech
+          </a>
+          <a href="mailto:bowskietech@gmail.com" class="contact-item">
+            <!-- Mail Icon -->
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+              <polyline points="22,6 12,13 2,6"></polyline>
+            </svg>
+            bowskietech@gmail.com
+          </a>
+          <a href="tel:+12055332666" class="contact-item">
+            <!-- Smartphone Icon -->
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
+              <line x1="12" y1="18" x2="12" y2="18.01"></line>
+            </svg>
+            +12055332666
+          </a>
+        </div>
+      </div>
+
+      <!-- Right side: Engagement Actions -->
+      <div class="right-section">
+        <button class="icon-btn" aria-label="Like option">
+          <!-- Heart Icon -->
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+          </svg>
+        </button>
+        <button class="icon-btn" aria-label="Save option">
+          <!-- Bookmark Icon -->
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
+          </svg>
+        </button>
+        <button class="icon-btn" aria-label="Schedule option">
+          <!-- Calendar Icon -->
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+            <line x1="16" y1="2" x2="16" y2="6"></line>
+            <line x1="8" y1="2" x2="8" y2="6"></line>
+            <line x1="3" y1="10" x2="21" y2="10"></line>
+          </svg>
+        </button>
+        <form action="https://apps.apple.com/us/app/aulete/id1176203406">
+          <button class="action-btn" type="submit">Download</button>
+        </form>
+        
+      </div>
+    </div>
+
+    <article class="grid-card">
+      <div class="image-wrapper">
+        <img 
+        src="https://uploads.onecompiler.io/456yqjsb9/1792842692305/Aulete%20Banner%201.png" 
+        alt="Aulete Banner 1"
+        class="max-w-full h-auto mx-auto rounded-lg">
+      </div>
+    </article>
+
+    <div class="section-layout">
+      <section>
+        <p>
+          From advanced instrument tuning to integrated audio streaming, unlock tools designed to perfect your performance.
+          Checkout our updated Arpeggio Metronome, Keyboard, and Tuner. Integrated streaming from Spotify and iTunes.
+          Supports all instruments, but specifically made for woodwind ensembles.
+        </p>
+      </section>
+    </div>
+
+    <div class="username">More Aulete</div>
+    <div class="section-container">
+      <div class="image-grid">
+        
+        <!-- Card One Component -->
+        <article class="grid-card">
+          <div class="image-wrapper">
+            <img src="https://uploads.onecompiler.io/456yqjsb9/1792858021785/Aulete%20Banner%202.png" alt="Audio Mixer Interface Banner Image 2">
+          </div>
+        </article>
+
+        <!-- Card Two Component -->
+        <article class="grid-card">
+          <div class="image-wrapper">
+            <img src="https://uploads.onecompiler.io/456yqjsb9/1792858027052/Aulete%20Banner%203.png" alt="Audio Mixer Interface Banner Image 3">
+          </div>
+        </article>
+
+        <!-- Card Three Component -->
+        <article class="grid-card">
+          <div class="image-wrapper">
+            <img src="https://uploads.onecompiler.io/456yqjsb9/1792858032202/Aulete%20Banner%204.png" alt="Audio Mixer Interface Banner Image 4">
+          </div>
+        </article>
+
+        <!-- Card Four Component -->
+        <article class="grid-card">
+          <div class="image-wrapper">
+            <img src="https://uploads.onecompiler.io/456yqjsb9/1792858036203/Aulete%20Banner%205.png" alt="Audio Mixer Interface Banner Image 5">
+          </div>
+        </article>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Lightbox Target Element Structure Overlay -->
+  <div id="lightbox" class="lightbox-modal" aria-hidden="true" role="dialog">
+    <button class="lightbox-close" id="lightboxClose" aria-label="Close layout view">
+      <!-- Modern Universal "X" Close Mark Icon Symbol -->
+      <svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
+    <img src="" alt="Large Focus Component View Mode Asset" class="lightbox-content" id="lightboxImg">
+  </div>
+</body>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const lightbox = document.getElementById("lightbox");
+      const lightboxImg = document.getElementById("lightboxImg");
+      const closeBtn = document.getElementById("lightboxClose");
+      const gridCards = document.querySelectorAll(".grid-card");
+
+      // 1. Loop through each grid card element and append active open trigger parameters
+      gridCards.forEach(card => {
+        card.addEventListener("click", () => {
+          const targetImage = card.querySelector("img");
+          if (targetImage) {
+            lightboxImg.src = targetImage.src;
+            lightboxImg.alt = targetImage.alt;
+            lightbox.classList.add("active");
+            lightbox.setAttribute("aria-hidden", "false");
+            document.body.style.overflow = "hidden"; /* Locks body scaling shifts */
+          }
+        });
+      });
+
+      // 2. Functional isolated action parameter routine to safely exit full screen
+      const closeLightbox = () => {
+        lightbox.classList.remove("active");
+        lightbox.setAttribute("aria-hidden", "true");
+        document.body.style.overflow = ""; /* Restores document page scroll */
+        setTimeout(() => { lightboxImg.src = ""; }, 300); // Cleans source trace line buffer after collapse animation finishes
+      };
+
+      // 3. Attach standard exit trigger events (Clicking button, click backdrop, or hit Esc key)
+      closeBtn.addEventListener("click", closeLightbox);
+      
+      lightbox.addEventListener("click", (e) => {
+        if (e.target === lightbox) closeLightbox();
+      });
+
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && lightbox.classList.contains("active")) {
+          closeLightbox();
+        }
+      });
+    });
+</script>
+</html>
